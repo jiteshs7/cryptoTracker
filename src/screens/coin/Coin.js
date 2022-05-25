@@ -74,12 +74,23 @@ const Coin= () => {
     fetch(singleCoin(coinId))
     .then(resp => resp.json())
     .then(data => {
-      setIsLoading(false)
+      console.log('CNGGG',data)
+      if(data.error){
+        setAlert({
+          open:'true',
+          message:data.error,
+          type:'error'
+        })
+        setIsLoading(false);
+        return;
+      }
       setCoin(data);
+      setIsLoading(false);
     })
     .catch(err => {
+      console.log('ERROR',err)
       setIsLoading(false)
-      console.log('ERROR',err)}
+    }
     )
   }
 
@@ -127,7 +138,9 @@ const Coin= () => {
 
   }
 
-  if(isLoading || !coin) return  <LinearProgress style={{ background: "gold", marginTop: "5%" }} />
+  if(isLoading) return  <LinearProgress style={{ background: "gold", marginTop: "5%" }} />
+
+  if(!coin || !coin.market_data ) return <div style={{fontSize:26,textAlign:'center',paddingTop:'20%'}} >Coin Not Found!</div>
 
   const Content = () => (
     <>

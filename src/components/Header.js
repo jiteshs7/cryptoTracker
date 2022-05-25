@@ -35,7 +35,7 @@ const Header = () => {
       <AppBar position="static" color='transparent' >
         <Container>
           <Toolbar>
-            <Typography variant='h6' onClick={()=>navigate('/')} className={classes.title} >
+            <Typography variant='h6' onClick={()=>navigate('/welcome')} className={classes.title} >
               Crypto Tracker
             </Typography>
             <Select onChange={(e) => changeCurrency(e.target.value)} value={currency} variant='outlined' style={{
