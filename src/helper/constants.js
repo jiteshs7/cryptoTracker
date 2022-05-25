@@ -1,7 +1,10 @@
 import { createTheme } from "@material-ui/core";
 
 export const numberWithCommas = (val) => {
-    return val.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g,",")
+  if (val === null) return 0;
+  return parseFloat(val)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
 
 export const darkTheme = createTheme({
