@@ -20,7 +20,6 @@ const inputStateReducer = (
         value: action.value,
         isTouched: state.isTouched,
       };
-      break;
 
     case "BLUR":
       return {
@@ -28,15 +27,11 @@ const inputStateReducer = (
         isTouched: true,
       };
 
-      break;
-
     case "RESET":
       return initialInputState;
-      break;
 
     default:
       return initialInputState;
-      break;
   }
 };
 

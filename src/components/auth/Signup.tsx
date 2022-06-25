@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Box, Button, TextField } from "@material-ui/core";
-import { makeStyles, createStyles } from "@material-ui/styles";
+// import { makeStyles, createStyles } from "@material-ui/styles";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 import { CryptoState } from "../../helper/CryptoContext";
@@ -32,24 +32,24 @@ const Signup: FC<SignUpProps> = ({ handleClose }) => {
     }
   };
 
-  const useStyles = makeStyles(() =>
-    createStyles({
-      btn: {
-        backgroundColor: "#EEBC1D",
-        color: "#000",
-        fontWeight: "bold",
-        fontSize: 14,
-        "&:hover": {
-          backgroundColor: "gold",
-          fontWeight: "600",
-        },
-      },
-      error: {
-        color: "red",
-        fontSize: 12,
-      },
-    })
-  );
+  // const useStyles = makeStyles(() =>
+  //   createStyles({
+  //     btn: {
+  //       backgroundColor: "#EEBC1D",
+  //       color: "#000",
+  //       fontWeight: "bold",
+  //       fontSize: 14,
+  //       "&:hover": {
+  //         backgroundColor: "gold",
+  //         fontWeight: "600",
+  //       },
+  //     },
+  //     error: {
+  //       color: "red",
+  //       fontSize: 12,
+  //     },
+  //   })
+  // );
 
   const {
     value: email,
@@ -88,11 +88,7 @@ const Signup: FC<SignUpProps> = ({ handleClose }) => {
     if (emailHasError || passwordHasError || cPasswordHasError) return;
 
     try {
-      const result = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      await createUserWithEmailAndPassword(auth, email, password);
 
       setAlert({
         open: true,
@@ -112,8 +108,6 @@ const Signup: FC<SignUpProps> = ({ handleClose }) => {
       });
     }
   };
-
-  const classes = useStyles();
 
   return (
     <Box

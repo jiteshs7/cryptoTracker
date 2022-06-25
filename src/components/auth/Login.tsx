@@ -58,7 +58,7 @@ const Login: FC<LoginProps> = ({ handleClose }) => {
     if (emailHasError || passwordHasError) return;
 
     try {
-      const result = await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
 
       emailReset();
       passwordReset();

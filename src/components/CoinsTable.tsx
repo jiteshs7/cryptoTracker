@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { createStyles, makeStyles, ThemeProvider } from "@material-ui/styles";
 import {
   Container,
@@ -48,6 +48,19 @@ const CoinsTable: FC = () => {
 
   const classes = useStyles();
 
+  const searchCrypto = useCallback(
+    (val: string) => {
+      const filterCoins = coins.filter(
+        (coin: CoinProps) =>
+          coin.name.toLowerCase().includes(val) ||
+          coin.symbol.toLowerCase().includes(val)
+      );
+
+      fetchFilteredCoins(filterCoins);
+    },
+    [coins]
+  );
+
   useEffect(() => {
     if (!search) return fetchFilteredCoins(coins);
     else {
@@ -59,17 +72,7 @@ const CoinsTable: FC = () => {
         clearTimeout(timer);
       };
     }
-  }, [search, coins]);
-
-  const searchCrypto = (val: string) => {
-    const filterCoins = coins.filter(
-      (coin: CoinProps) =>
-        coin.name.toLowerCase().includes(val) ||
-        coin.symbol.toLowerCase().includes(val)
-    );
-
-    fetchFilteredCoins(filterCoins);
-  };
+  }, [search, coins, searchCrypto]);
 
   let containerUI: JSX.Element | null = null;
 

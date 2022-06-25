@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { createStyles, ThemeProvider } from "@material-ui/styles";
 import { Line } from "react-chartjs-2";
@@ -40,7 +40,7 @@ const CoinInfo: FC<CoinInfoProps> = ({ coinId }) => {
 
   const { currency, symbol } = CryptoState();
 
-  const fetchData = () => {
+  const fetchData = useCallback(() => {
     setIsLoading(true);
     fetch(historicalChart(coinId, days, currency))
       .then((resp) => resp.json())
@@ -52,11 +52,11 @@ const CoinInfo: FC<CoinInfoProps> = ({ coinId }) => {
         setIsLoading(false);
         console.log("HISTORY ERROR", err);
       });
-  };
+  }, [coinId, currency, days]);
 
   useEffect(() => {
     fetchData();
-  }, [days, currency]);
+  }, [days, currency, fetchData]);
 
   const handleDayClick = (num: number) => {
     setDays(num);
