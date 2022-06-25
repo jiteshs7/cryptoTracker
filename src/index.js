@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import { render } from "react-dom";
 import "react-alice-carousel/lib/alice-carousel.css";
 
 import "./index.css";
@@ -7,13 +7,15 @@ import App from "./App";
 import CryptoContext from "./helper/CryptoContext";
 import { BrowserRouter } from "react-router-dom";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+const root = document.getElementById("root");
+// render(<App />, root);
+render(
   // <React.StrictMode>
   <BrowserRouter>
     <CryptoContext>
       <App />
     </CryptoContext>
-  </BrowserRouter>
+  </BrowserRouter>,
+  root
   // </React.StrictMode>
 );

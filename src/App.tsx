@@ -2,6 +2,7 @@ import React, { FC, lazy, Suspense } from "react";
 import "./App.css";
 import { makeStyles } from "@material-ui/styles";
 import { Route, Routes, Navigate } from "react-router-dom";
+import { LinearProgress } from "@material-ui/core";
 
 import Header from "./components/Header";
 import Home from "./screens/home/Home";
@@ -27,7 +28,11 @@ const App: FC = () => {
       <div className={classes.app}>
         <Header />
         <div>
-          <Suspense>
+          <Suspense
+            fallback={
+              <LinearProgress style={{ background: "gold", marginTop: "5%" }} />
+            }
+          >
             <Routes>
               <Route path="/" element={<Navigate to="/welcome" replace />} />
               <Route path="/welcome" element={<Home />} />
@@ -43,3 +48,6 @@ const App: FC = () => {
 };
 
 export default App;
+//@testing-library/react @testing-library/jest-dom @testing-library/react @testing-library/user-event
+//@material-ui/styles @material-ui/core @material-ui/lab
+//@types/jest @types/node @types/react @types/react-dom
